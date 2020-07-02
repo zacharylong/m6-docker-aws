@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-RUN apt-get update -y && apt-get install -y python3 python3-pip
+RUN apt-get update -y && apt-get install -y python3 python3-pip flask
 
 COPY app /app/
 WORKDIR /app
