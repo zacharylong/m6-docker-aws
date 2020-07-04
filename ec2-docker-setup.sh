@@ -1,5 +1,23 @@
 #!/usr/bin/bash
 
+# Manual set up behind the scenes:
+# Create RDS instance from previous snapshot m6-demo-db
+# Create S3 buckets:
+#   zacs-m6-image-gallery
+#   zacs-m6-image-gallery-config
+# Create secrets manager for M6:
+#   image_gallery_secret-m6
+#   {
+#      "username": "image_gallery",
+#      "password": "n,|gRz$#_Bc&EmAjyI)t[j3vCv^4ty4n",
+#      "engine": "postgres",
+#      "host": "m6-demo-db.ccywtilknp5x.us-east-2.rds.amazonaws.com",
+#      "port": 5432,
+#      "dbInstanceIdentifier": "m6-demo-db",
+#      "database_name": "image_gallery"
+#    }
+# Give this EC2 role IAM access for now upon boot
+
 # Install packages
 yum -y update
 yum install -y emacs-nox nano tree python3 git postgresql postgresql-devel gcc python3-devel
@@ -8,9 +26,17 @@ pip3 install --user boto3 psycopg2 flask uwsgi
 # Configure/install custom software
 # Deploy python image gallery
 cd /home/ec2-user
-git clone https://github.com/zacharylong/python-image-gallery.git
-chown -R ec2-user:ec2-user python-image-gallery
-su ec2-user -c "cd ~/python-image-gallery && pip3 install -r requirements.txt --user"
+git clone https://github.com/zacharylong/python-image-gallery-m6.git
+chown -R ec2-user:ec2-user python-image-gallery-m6
+su ec2-user -c "cd ~/python-image-gallery-m6 && pip3 install -r requirements.txt --user"
+
+BUCKET="zacs-m6-image-gallery-config"
+
+cd /home/ec2-user/python-image-gallery-m6
+
+aws s3 cp ec2-scripts/ec2-prod-1.1.sh s3://${BUCKET}
+aws s3 cp ec2-scripts/ec2-prod-latest.sh s3://${BUCKET}
+aws s3 sync nginx s3://${BUCKET}/nginx
 
 # Start/enable services
 systemctl stop postfix
