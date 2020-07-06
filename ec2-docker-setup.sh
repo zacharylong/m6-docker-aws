@@ -2,6 +2,7 @@
 
 # Manual set up behind the scenes:
 # Create RDS instance from previous snapshot m6-demo-db
+# Make RDS publiclly accessible, in defauly VPC (same as EC2), and Open Security Group
 # Create S3 buckets:
 #   zacs-m6-image-gallery
 #   zacs-m6-image-gallery-config
@@ -17,12 +18,16 @@
 #      "database_name": "image_gallery"
 #    }
 # Give this EC2 role IAM access for now upon boot
+# store IAM secret keys in Secret manager so that app can pull them down for access to buckets
+# add endpoint to secrets manager to default vpc by creating security group and putting default vpc in sg
+# assign endpoint security group to EC2 and VPC!
+# 
 
 # Install packages
 yum -y update
 yum install -y emacs-nox nano tree python3 git postgresql postgresql-devel gcc python3-devel
 amazon-linux-extras install -y nginx1
-pip3 install --user boto3 psycopg2 flask uwsgi 
+pip3 install --user boto3 psycopg2 flask uwsgi arrow
 
 
 # Configure/install custom software
@@ -33,6 +38,7 @@ chown -R ec2-user:ec2-user python-image-gallery-m6
 su ec2-user -l -c "cd ~/python-image-gallery-m6 && pip3 install -r requirements.txt --user"
 
 BUCKET="zacs-m6-image-gallery-config"
+CONFIG_BUCKET="zacs-m6-image-gallery-config"
 
 #copy script files into S3
 cd /home/ec2-user/python-image-gallery-m6
