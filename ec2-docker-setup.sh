@@ -22,6 +22,22 @@
 # add endpoint to secrets manager to default vpc by creating security group and putting default vpc in sg
 # assign endpoint security group to EC2 and VPC!
 # 
+# Add public access policy to public display images for viewing:
+# {
+#     "Id": "Policy1594018887620",
+#     "Version": "2012-10-17",
+#     "Statement": [
+#         {
+#             "Sid": "Stmt1594018876752",
+#             "Action": [
+#                 "s3:GetObject"
+#             ],
+#             "Effect": "Allow",
+#             "Resource": "arn:aws:s3:::zacs-m6-image-gallery/*",
+#             "Principal": "*"
+#         }
+#     ]
+# }
 
 # Install packages
 yum -y update
@@ -77,10 +93,11 @@ cd /home/ec2-user/m6-docker-aws
 #build the test ubuntu image
 docker build -f Dockerfile . -t ubuntu:latest
 
-#Build the flask docker image
-docker build -f Dockerfile.flask . -t flask:latest
+# Build the flask docker image
+# docker build -f Dockerfile.flask . -t flask:latest
 
-#create volume for database
-docker volume create data
-docker run --volume data:/mnt/data ubuntu
+# create volume for database
+#
+# docker volume create data
+# docker run --volume data:/mnt/data ubuntu
 
