@@ -1,3 +1,4 @@
 #!usr/bin/bash
 
 docker run --name demo-postgres --user 32767 -it --rm -v /home/ec2-user/secrets:/mnt/secrets -v demo-postgres:/var/lib/postgresql/data -d demo-postgres
+docker run -it --rm -v "$(pwd)"/secrets:/mnt/secrets -v demo-postgres:/var/lib/postgresql/data demo-postgres
