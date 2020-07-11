@@ -1,0 +1,37 @@
+---
+version: "3"
+#rexray efs example
+
+services: 
+    registry:
+        image: registry:latest
+        ports: 
+            - "5000:5000"
+        deploy:
+            replicas: 1
+
+    flask:
+        #get from local registry if not published
+        image: "localhost:5000/flask"
+        deploy: 
+            mode: "replicated"
+            replicas: 2
+        depends_on: 
+            - "registry"
+
+    db:
+        image: "postgres"
+        environment: 
+            POSTGRES_PASSWORD: "v^l!o|EjMH?LM6.JkbV3`86(.D^4?)8w"
+            POSTGRES_USER: postgres
+            POSTGRES_DB: postgres
+            PGDATA: /var/lib/postgresql/data/pgdata
+        deploy:
+            replicas: 1
+        volumes:
+            - "/Users/zacharylong/Dropbox/Zac Auburn Files/CPSC 4973 Cloud Computing/M6/M6Project/image-gallery-postgres:/var/lib/postgresql/data"
+
+volumes:
+    registry:
+    image-gallery-postgres:
+        driver: rexray/efs
