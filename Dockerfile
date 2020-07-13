@@ -1,10 +1,3 @@
-# Create postgres
-# create users
-# create tables
-# copy app from github
-# set up app
-# launch app
-
 FROM ubuntu:latest
 
 # Build instructions
@@ -71,13 +64,13 @@ RUN cp /home/ec2-user/python-image-gallery-m6/nginx/default.d/image_gallery.conf
 # CMD ["./createDB"]
 
 #Run the uwsgi server and serve the app
-# USER ec2-user
-# WORKDIR /python-image-gallery-m6
-# ENV FLASK_APP=gallery.ui.app.py
-# ENV FLASK_ENV=development
-# EXPOSE 5555
-# EXPOSE 9191
-# CMD ["uwsgi", "--http", ":5555", "--module", "gallery.ui.app:app", "--master", "--processes", "4", "--threads", "2", "--stats", "0.0.0.0:9191"]
+USER ec2-user
+WORKDIR /python-image-gallery-m6
+ENV FLASK_APP=gallery.ui.app.py
+ENV FLASK_ENV=development
+EXPOSE 5555
+EXPOSE 9191
+CMD ["uwsgi", "--http", ":5555", "--module", "gallery.ui.app:app", "--master", "--processes", "4", "--threads", "2", "--stats", "0.0.0.0:9191"]
 
 # Boot command (same as above)
 # CMD [ "/python-image-gallery-m6", "./start" ]
