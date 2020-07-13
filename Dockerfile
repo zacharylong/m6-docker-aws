@@ -26,7 +26,8 @@ ENV S3_IMAGE_BUCKET="zacs-m6-image-gallery"
 # install basic packages
 RUN apt-get update -y && apt-get install nginx emacs-nox apt-utils libpcre3 libpcre3-dev -y --no-install-recommends
 RUN apt-get update -y && apt-get install python3 python3-pip tree git postgresql postgresql-contrib -y --no-install-recommends
-RUN apt-get update -y && apt-get install postgresql-client postgresql-client-common libpq-dev build-essential python3-dev -y --no-install-recommends
+RUN apt-get update -y && apt-get install postgresql-client postgresql-client-common libpq-dev build-essential python3-dev uwsgi -y --no-install-recommends
+
 
 # Create ec2-user account
 #RUN useradd -m -u 90210 ec2-user

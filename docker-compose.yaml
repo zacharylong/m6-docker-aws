@@ -39,7 +39,7 @@ services:
 
     image_gallery:
         #get from local registry if not published
-        image: "imagegallery:latest"
+        image: "image_gallery:latest"
         deploy: 
             mode: "replicated"
             replicas: 2
