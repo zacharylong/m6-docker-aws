@@ -11,6 +11,7 @@ FROM ubuntu:latest
 ENV NAME="Zac"
 ENV TZ=America/New_York
 ENV DEBIAN_FRONTEND=noninteractive
+RUN useradd -m -u 32676 ec2-user
 
 #Environment variables from M6 Requirements:
 USER root
@@ -23,29 +24,33 @@ ENV IG_PASSWD_FILE="IG_PASSWRD"
 ENV S3_IMAGE_BUCKET="zacs-m6-image-gallery"
 
 # install basic packages
-USER root
 RUN apt-get update -y && apt-get install nginx emacs-nox apt-utils libpcre3 libpcre3-dev -y --no-install-recommends
 RUN apt-get update -y && apt-get install python3 python3-pip tree git postgresql postgresql-contrib -y --no-install-recommends
 RUN apt-get update -y && apt-get install postgresql-client postgresql-client-common libpq-dev build-essential python3-dev -y --no-install-recommends
-
-# install python packages
-RUN pip3 install --user boto3 psycopg2-binary psycopg2 flask uwsgi arrow
 
 # Create ec2-user account
 #RUN useradd -m -u 90210 ec2-user
 # Only create if doesn't already exist
 #CMD ["id", "-u ec2-user >/dev/null 2>&1 || useradd ec2-user"]
-RUN id -u ec2-user >/dev/null 2>&1 || useradd ec2-user
+RUN id -u ec2-user >/dev/null 2>&1 || useradd -m ec2-user
+
+# install python packages
+USER ec2-user
+WORKDIR /home/ec2-user
+RUN pip3 install --user boto3 psycopg2-binary psycopg2 flask uwsgi arrow
+
 
 # get latest image-gallery from github
+USER root
+WORKDIR /home/ec2-user
 RUN git clone https://github.com/zacharylong/python-image-gallery-m6.git
 RUN chown -R ec2-user:ec2-user python-image-gallery-m6
 
 # install latest requirements just in case!
-#USER ec2-user
-WORKDIR /python-image-gallery-m6
-#RUN cd python-image-gallery-m6
-RUN pip3 install -r requirements.txt --user
+# USER ec2-user
+# WORKDIR /python-image-gallery-m6
+# #RUN cd python-image-gallery-m6
+# RUN pip3 install -r requirements.txt --user
 
 # config nginx config files
 RUN cp /python-image-gallery-m6/nginx/nginx.conf /etc/nginx
