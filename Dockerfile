@@ -53,8 +53,8 @@ RUN chown -R ec2-user:ec2-user python-image-gallery-m6
 # RUN pip3 install -r requirements.txt --user
 
 # config nginx config files
-RUN cp /python-image-gallery-m6/nginx/nginx.conf /etc/nginx
-RUN cp /python-image-gallery-m6/nginx/default.d/image_gallery.conf /etc/nginx/default.d
+RUN cp /home/ec2-user/python-image-gallery-m6/nginx/nginx.conf /etc/nginx
+RUN cp /home/ec2-user/python-image-gallery-m6/nginx/default.d/image_gallery.conf /etc/nginx/default.d
 
 #start/enable services
 #RUN service nginx start
