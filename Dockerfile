@@ -70,7 +70,7 @@ ENV FLASK_APP=gallery.ui.app.py
 ENV FLASK_ENV=development
 EXPOSE 5555
 EXPOSE 9191
-CMD ["uwsgi", "--http", ":5555", "--module", "gallery.ui.app:app", "--master", "--processes", "4", "--threads", "2", "--stats", "0.0.0.0:9191"]
+CMD ["uwsgi", "--http-socket", ":5555", "--module", "gallery.ui.app:app", "--master", "--processes", "4", "--threads", "2", "--stats", "0.0.0.0:9191"]
 
 # Boot command (same as above)
 # CMD [ "/python-image-gallery-m6", "./start" ]
