@@ -42,7 +42,8 @@ COPY python-image-gallery-m6 /home/ec2-user/python-image-gallery-m6/
 RUN chown -R ec2-user:ec2-user python-image-gallery-m6
 
 # install latest requirements just in case!
-USER ec2-user
+# dont install as user, not on PATH
+# USER ec2-user
 WORKDIR /home/ec2-user/python-image-gallery-m6
 # #RUN cd python-image-gallery-m6
 RUN pip3 install -r requirements.txt --user
