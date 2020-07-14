@@ -37,8 +37,8 @@ RUN id -u ec2-user >/dev/null 2>&1 || useradd -m ec2-user
 # get latest image-gallery from github
 #USER root
 WORKDIR /home/ec2-user
-COPY python-image-gallery-m6 /home/ec2-user/python-image-gallery-m6/
-# RUN git clone https://github.com/zacharylong/python-image-gallery-m6.git
+# COPY python-image-gallery-m6 /home/ec2-user/python-image-gallery-m6/
+RUN git clone https://github.com/zacharylong/python-image-gallery-m6.git
 RUN chown -R ec2-user:ec2-user python-image-gallery-m6
 RUN pip3 install -r python-image-gallery-m6/requirements.txt
 
