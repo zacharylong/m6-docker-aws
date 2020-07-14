@@ -29,9 +29,9 @@ RUN apt-get update -y && apt-get install postgresql-client postgresql-client-com
 RUN id -u ec2-user >/dev/null 2>&1 || useradd -m ec2-user
 
 # install python packages
-USER ec2-user
-WORKDIR /home/ec2-user
-RUN pip3 install --user boto3 psycopg2-binary psycopg2 flask arrow
+# USER ec2-user
+# WORKDIR /home/ec2-user
+# RUN pip3 install --user boto3 psycopg2-binary psycopg2 flask arrow
 
 
 # get latest image-gallery from github
