@@ -37,15 +37,15 @@ RUN pip3 install --user boto3 psycopg2-binary psycopg2 flask uwsgi arrow
 # get latest image-gallery from github
 USER root
 WORKDIR /home/ec2-user
-COPY ../python-image-gallery-m6 /home/ec2-user/python-image-gallery-m6/
+COPY python-image-gallery-m6 /home/ec2-user/python-image-gallery-m6/
 # RUN git clone https://github.com/zacharylong/python-image-gallery-m6.git
 RUN chown -R ec2-user:ec2-user python-image-gallery-m6
 
 # install latest requirements just in case!
-# USER ec2-user
-# WORKDIR /python-image-gallery-m6
+USER ec2-user
+WORKDIR /home/ec2-user/python-image-gallery-m6
 # #RUN cd python-image-gallery-m6
-# RUN pip3 install -r requirements.txt --user
+RUN pip3 install -r requirements.txt --user
 
 # Don't need nginx right?
 # config nginx config files
