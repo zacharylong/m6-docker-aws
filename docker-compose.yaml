@@ -22,7 +22,7 @@ services:
             POSTGRES_PASSWORD: "v^l!o|EjMH?LM6.JkbV3`86(.D^4?)8w"
             POSTGRES_USER: image_gallery
             POSTGRES_DB: image_gallery
-            PGDATA: /var/lib/postgresql/data/pgdata
+            PGDATA: "/var/lib/postgresql/data/pgdata"
             POSTGRES_PORT: 5432
             
         deploy:
@@ -31,12 +31,13 @@ services:
                 constraints:
                     - database==yes
         secrets:
-            - ig_password
+            - ig_passwd
         configs:
             - source: flask_config
                 target: /etc/flask.config
                 mode: 0444
         volumes:
+            - "/home/ec2-user/m6-docker-aws/init:/docker-entrypoint-initdb.d"
             - "/mnt/efs/postgres-data:/var/lib/postgresql/data"
 
     image_gallery:
@@ -51,7 +52,7 @@ services:
             mode: "replicated"
             replicas: 2
         secrets:
-            - ig_password
+            - ig_passwd
             - flask_session_key
         configs:
             - source: flask_config
@@ -71,7 +72,7 @@ volumes:
 secrets:
     image_gallery_password:
         external: true
-    ig_password:
+    ig_passwd:
         external: true
     flask_session_key:
         external: true
