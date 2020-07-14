@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN useradd -m -u 32676 ec2-user
 
 #Environment variables from M6 Requirements:
-USER root
+#USER root
 ENV PG_HOST="m6-demo-db.ccywtilknp5x.us-east-2.rds.amazonaws.com"
 ENV PG_PORT=5432
 ENV IG_DATABASE="image_gallery"
@@ -35,7 +35,7 @@ RUN id -u ec2-user >/dev/null 2>&1 || useradd -m ec2-user
 
 
 # get latest image-gallery from github
-USER root
+#USER root
 WORKDIR /home/ec2-user
 COPY python-image-gallery-m6 /home/ec2-user/python-image-gallery-m6/
 # RUN git clone https://github.com/zacharylong/python-image-gallery-m6.git
