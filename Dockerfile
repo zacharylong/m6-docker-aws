@@ -37,7 +37,8 @@ RUN pip3 install --user boto3 psycopg2-binary psycopg2 flask uwsgi arrow
 # get latest image-gallery from github
 USER root
 WORKDIR /home/ec2-user
-RUN git clone https://github.com/zacharylong/python-image-gallery-m6.git
+COPY ../python-image-gallery-m6 /home/ec2-user/python-image-gallery-m6/
+# RUN git clone https://github.com/zacharylong/python-image-gallery-m6.git
 RUN chown -R ec2-user:ec2-user python-image-gallery-m6
 
 # install latest requirements just in case!
@@ -73,8 +74,8 @@ EXPOSE 5555
 EXPOSE 9191
 EXPOSE 8888
 #CMD ["uwsgi", "--http", "8888", "--module", "gallery.ui.app:app"]
-#CMD ["uwsgi", "--http", ":5555", "--module", "gallery.ui.app:app", "--master", "--processes", "4", "--threads", "2", "--stats", "0.0.0.0:9191"]
-CMD ["uwsgi", "-s", "localhost:5555", "--manage-script-name", "--mount", "/=gallery.ui.app:app"]
+CMD ["uwsgi", "--http", ":5555", "--module", "gallery.ui.app:app", "--master", "--processes", "4", "--threads", "2", "--stats", "0.0.0.0:9191"]
+#CMD ["uwsgi", "-s", "localhost:5555", "--manage-script-name", "--mount", "/=gallery.ui.app:app"]
 
 # Boot command (same as above)
 # CMD [ "/python-image-gallery-m6", "./start" ]
