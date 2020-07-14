@@ -34,8 +34,8 @@ services:
             - ig_passwd
         configs:
             - source: flask_config
-                target: /etc/flask.config
-                mode: 0444
+              target: /etc/flask.config
+              mode: 0444
         volumes:
             - "/home/ec2-user/m6-docker-aws/init:/docker-entrypoint-initdb.d"
             - "/mnt/efs/postgres-data:/var/lib/postgresql/data"
@@ -56,8 +56,8 @@ services:
             - flask_session_key
         configs:
             - source: flask_config
-                target: /etc/flask.config
-                mode: 0444
+              target: /etc/flask.config
+              mode: 0444
         ports:
             - "8888:5000"
         depends_on: 
