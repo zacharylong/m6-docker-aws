@@ -8,11 +8,20 @@ RUN useradd -m -u 32676 ec2-user
 
 #Environment variables from M6 Requirements:
 #USER root
-ENV PG_HOST="m6-demo-db.ccywtilknp5x.us-east-2.rds.amazonaws.com"
-ENV PG_PORT=5432
-ENV IG_DATABASE="image_gallery"
-ENV IG_USER="image_gallery"
-ENV IG_PASSWD="n,|gRz$#_Bc&EmAjyI)t[j3vCv^4ty4n"
+#ENV variables from M7 docker-compose
+#ENV POSTGRES_PASSWORD: "v^l!o|EjMH?LM6.JkbV3`86(.D^4?)8w"
+ENV POSTGRES_PASSWORD="n,|gRz$#_Bc&EmAjyI)t[j3vCv^4ty4n"
+ENV POSTGRES_USER="image_gallery"
+ENV POSTGRES_DB="image_gallery"
+ENV PGDATA="/var/lib/postgresql/data/pgdata"
+ENV POSTGRES_HOST="ec2-3-129-20-226.us-east-2.compute.amazonaws.com"
+ENV POSTGRES_PORT=5432
+
+#ENV PG_HOST="m6-demo-db.ccywtilknp5x.us-east-2.rds.amazonaws.com"
+#ENV PG_PORT=5432
+#ENV IG_DATABASE="image_gallery"
+#ENV IG_USER="image_gallery"
+#ENV IG_PASSWD="n,|gRz$#_Bc&EmAjyI)t[j3vCv^4ty4n"
 ENV IG_PASSWD_FILE="IG_PASSWRD" 
 ENV S3_IMAGE_BUCKET="zacs-m6-image-gallery"
 
