@@ -45,6 +45,7 @@ services:
         image: "image_gallery:latest"
         environment: 
             S3_IMAGE_BUCKET: zacs-m6-image-gallery
+            COGNITO_SECRET: qrf18amslqvs04erroch6586fsncn63pqmqdovt1vk7huggqnep
         deploy: 
             mode: "replicated"
             replicas: 2
