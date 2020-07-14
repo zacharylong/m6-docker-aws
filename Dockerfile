@@ -77,8 +77,8 @@ EXPOSE 9191
 EXPOSE 8888
 #CMD ["uwsgi", "--http", "8888", "--module", "gallery.ui.app:app"]
 #CMD ["flask", "run", "--host", "0.0.0.0"]
-CMD ["uwsgi", "--http", "5555", "--module", "gallery.ui.app:app"]
-#CMD ["uwsgi", "--http", ":5555", "--module", "app:app", "--master", "--processes", "4", "--threads", "2", "--stats", "0.0.0.0:9191"]
+#CMD ["uwsgi", "--http", "5555", "--module", "gallery.ui.app:app"]
+CMD ["uwsgi", "--http", ":5555", "--module", "gallery.ui.app:app", "--master", "--processes", "4", "--threads", "2", "--stats", "0.0.0.0:9191"]
 #copy of start script
 #CMD ["uwsgi", "-s", "localhost:5555", "--manage-script-name", "--mount", "/=gallery.ui.app:app"]
 
