@@ -68,7 +68,7 @@ RUN pip3 install -r requirements.txt --user
 #Run the uwsgi server and serve the app
 USER ec2-user
 WORKDIR /home/ec2-user/python-image-gallery-m6
-ENV FLASK_APP=gallery.ui.app.py
+ENV FLASK_APP=/home/ec2-user/python-image-gallery-m6/gallery/ui/app.py
 ENV FLASK_ENV=development
 EXPOSE 5555
 EXPOSE 9191
