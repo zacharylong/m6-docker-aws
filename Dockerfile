@@ -4,7 +4,7 @@ FROM ubuntu:latest
 ENV NAME="Zac"
 ENV TZ=America/New_York
 ENV DEBIAN_FRONTEND=noninteractive
-RUN useradd -m -u 32676 ec2-user
+RUN useradd -m ec2-user -u 32676
 
 #Environment variables from M6 Requirements:
 #USER root
