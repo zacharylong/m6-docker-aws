@@ -16,7 +16,7 @@ ENV POSTGRES_DB="image_gallery"
 ENV PGDATA="/var/lib/postgresql/data/pgdata"
 ENV POSTGRES_HOST="ec2-3-129-20-226.us-east-2.compute.amazonaws.com"
 ENV POSTGRES_PORT=5432
-ENV IG_SECRET=""
+ENV IG_SECRET="nil"
 ENV COGNITO_SECRET="qrf18amslqvs04erroch6586fsncn63pqmqdovt1vk7huggqnep"
 
 #ENV PG_HOST="m6-demo-db.ccywtilknp5x.us-east-2.rds.amazonaws.com"
