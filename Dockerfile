@@ -17,7 +17,7 @@ ENV IG_PASSWD_FILE="IG_PASSWRD"
 ENV S3_IMAGE_BUCKET="zacs-m6-image-gallery"
 
 # install basic packages
-RUN apt-get update -y && apt-get install nginx emacs-nox apt-utils libpcre3 libpcre3-dev -y --no-install-recommends
+RUN apt-get update -y && apt-get install emacs-nox apt-utils libpcre3 libpcre3-dev -y --no-install-recommends
 RUN apt-get update -y && apt-get install python3 python3-pip tree git postgresql postgresql-contrib -y --no-install-recommends
 RUN apt-get update -y && apt-get install postgresql-client postgresql-client-common libpq-dev build-essential python3-dev uwsgi -y --no-install-recommends
 
@@ -46,9 +46,10 @@ RUN chown -R ec2-user:ec2-user python-image-gallery-m6
 # #RUN cd python-image-gallery-m6
 # RUN pip3 install -r requirements.txt --user
 
+# Don't need nginx right?
 # config nginx config files
-RUN cp /home/ec2-user/python-image-gallery-m6/nginx/nginx.conf /etc/nginx
-RUN cp /home/ec2-user/python-image-gallery-m6/nginx/default.d/image_gallery.conf /etc/nginx/default.d
+# RUN cp /home/ec2-user/python-image-gallery-m6/nginx/nginx.conf /etc/nginx
+# RUN cp /home/ec2-user/python-image-gallery-m6/nginx/default.d/image_gallery.conf /etc/nginx/default.d
 
 #start/enable services
 #RUN service nginx start
