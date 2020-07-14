@@ -2,19 +2,19 @@
 version: "3.8"
 
 services: 
-    registry:
-        image: registry:latest
-        ports: 
-            - "5000:5000"
-        deploy:
-            replicas: 1
-            placement:
-                constraints:
-                    - node.role==manager
-        environment: 
-            REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /mnt/registry
-        volumes:
-            - "registry:/mnt/registry"
+    # registry:
+    #     image: registry:latest
+    #     ports: 
+    #         - "5000:5000"
+    #     deploy:
+    #         replicas: 1
+    #         placement:
+    #             constraints:
+    #                 - node.role==manager
+    #     environment: 
+    #         REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /mnt/registry
+    #     volumes:
+    #         - "registry:/mnt/registry"
 
     database:
         image: "postgres"
@@ -23,7 +23,6 @@ services:
             POSTGRES_USER: image_gallery
             POSTGRES_DB: image_gallery
             PGDATA: /var/lib/postgresql/data/pgdata
-            POSTGRES_HOST: ec2-3-129-20-226.us-east-2.compute.amazonaws.com
             POSTGRES_PORT: 5432
             
         deploy:
@@ -42,10 +41,12 @@ services:
 
     image_gallery:
         #get from local registry if not published
-        image: "image_gallery:latest"
+        #image: "image_gallery:latest"
+        image: zacharylong/m6-cloud-computing:latest
         environment: 
             S3_IMAGE_BUCKET: zacs-m6-image-gallery
             COGNITO_SECRET: qrf18amslqvs04erroch6586fsncn63pqmqdovt1vk7huggqnep
+            POSTGRES_HOST: "database"
         deploy: 
             mode: "replicated"
             replicas: 2
