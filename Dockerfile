@@ -40,13 +40,14 @@ WORKDIR /home/ec2-user
 COPY python-image-gallery-m6 /home/ec2-user/python-image-gallery-m6/
 # RUN git clone https://github.com/zacharylong/python-image-gallery-m6.git
 RUN chown -R ec2-user:ec2-user python-image-gallery-m6
+RUN pip3 install -r python-image-gallery-m6/requirements.txt --user
 
 # install latest requirements just in case!
 # dont install as user, not on PATH
 # USER ec2-user
-WORKDIR /home/ec2-user/python-image-gallery-m6
+#WORKDIR /home/ec2-user/python-image-gallery-m6
 # #RUN cd python-image-gallery-m6
-RUN pip3 install -r requirements.txt --user
+#RUN pip3 install -r requirements.txt --user
 
 # Don't need nginx right?
 # config nginx config files
