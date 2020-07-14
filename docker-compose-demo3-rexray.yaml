@@ -29,7 +29,7 @@ services:
         deploy:
             replicas: 1
         volumes:
-            - "/Users/zacharylong/Dropbox/Zac Auburn Files/CPSC 4973 Cloud Computing/M6/M6Project/image-gallery-postgres:/var/lib/postgresql/data"
+            - "/home/ec2-user/m6-docker-aws/image-gallery-postgres:/var/lib/postgresql/data"
 
 volumes:
     registry:

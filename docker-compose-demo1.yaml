@@ -7,7 +7,7 @@ services:
         image: demo-postgres
         user: "32767"
         volumes: 
-            - "/Users/zacharylong/Dropbox/Zac Auburn Files/CPSC 4973 Cloud Computing/M6/M6Project/demo/secrets:/mnt/secrets"
+            - "/home/ec2-user/m6-docker-aws/demo/secrets:/mnt/secrets"
             - "demo-postgres:/var/lib/postgresql/data"
 
     web:
@@ -17,12 +17,12 @@ services:
             PG_HOST: "db"
             PG_PORT: "5432"
             IG_USER: "postgres"
-            IG_PASSWD_FILE: "/Users/zacharylong/Dropbox/Zac Auburn Files/CPSC 4973 Cloud Computing/M6/M6Project/demo/secrets/postgres_passwd"
+            IG_PASSWD_FILE: "/home/ec2-user/m6-docker-aws/demo/secrets/postgres_passwd"
             IG_DATABASE: "postgres"
         ports:
             - "5000:8888"
         volumes:
-            - "/Users/zacharylong/Dropbox/Zac Auburn Files/CPSC 4973 Cloud Computing/M6/M6Project/demo/secrets:/mnt/secrets"
+            - "/home/ec2-user/m6-docker-aws/demo/secrets:/mnt/secrets"
         depends_on: 
             - "db"
 
