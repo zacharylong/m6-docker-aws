@@ -16,7 +16,7 @@ services:
             replicas: 1
             placement:
                 constraints:
-                    - database==yes
+                    - node.labels.database==yes
         secrets:
             - ig_passwd
         configs:
