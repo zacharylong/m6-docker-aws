@@ -44,7 +44,7 @@ services:
               target: /etc/flask.config
               mode: 0444
         ports:
-            - "8888:5000"
+            - "80:5000"
         depends_on: 
             - "database"
 
