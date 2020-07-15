@@ -39,6 +39,8 @@ services:
         secrets:
             - ig_passwd
             - flask_session_key
+            - S3_KEY
+            - S3_SECRET_ACCESS_KEY
         configs:
             - source: flask_config
               target: /etc/flask.config
@@ -60,6 +62,10 @@ secrets:
         external: true
     flask_session_key:
         external: true
+    S3_KEY:
+        external: true
+    S3_SECRET_ACCESS_KEY:
+        external: true    
 
 configs:
     flask_config:
