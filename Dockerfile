@@ -10,6 +10,7 @@ RUN useradd -m ec2-user -u 32676
 #USER root
 #ENV variables from M7 docker-compose
 #ENV POSTGRES_PASSWORD: "v^l!o|EjMH?LM6.JkbV3`86(.D^4?)8w"
+#Moved the S3 secrets to environment variables
 ENV POSTGRES_PASSWORD="n,|gRz$#_Bc&EmAjyI)t[j3vCv^4ty4n"
 ENV POSTGRES_USER="image_gallery"
 ENV POSTGRES_DB="image_gallery"
