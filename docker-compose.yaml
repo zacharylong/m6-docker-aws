@@ -6,7 +6,7 @@ services:
     database:
         image: "postgres"
         environment: 
-            POSTGRES_PASSWORD: "v^l!o|EjMH?LM6.JkbV3`86(.D^4?)8w"
+            POSTGRES_PASSWORD: "n,|gRz$#_Bc&EmAjyI)t[j3vCv^4ty4n"
             POSTGRES_USER: image_gallery
             POSTGRES_DB: image_gallery
             PGDATA: "/var/lib/postgresql/data/pgdata"
